@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-const Key = '886705b4c1182eb1c69f28eb8c520e20'
+const Key = '3bc1bd8c1b1fde17643249bb3adaa36c'
 export const WeatherServices: any = () => {
   return axios
-  .get(`https://api.openweathermap.org/data/2.5/forecast/daily?q=Chisinau&cnt=5&units=metric&appid=${Key}`)
+  .get(`https://api.openweathermap.org/data/2.5/forecast?q=Chisinau&cnt=5&appid=${Key}`)
   .then(response => { console.log(response.data) })
 }
 
