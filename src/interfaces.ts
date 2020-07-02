@@ -7,9 +7,21 @@ interface Weather {
   main: string;
 }
 
+export interface dayData {
+  day: ForecastData;
+  index: number;
+}
+
+interface Main {
+  humidity: number;
+  temp_max: number;
+  temp_min: number;
+}
 export interface ForecastData {
   dt: number;
-  humidity: number;
-  temp: Temp;
+  main: Main;
   weather: Weather[];
+}
+export interface Props {
+  data: ForecastData[];
 }

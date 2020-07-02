@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import { DailyItem } from '../../atoms/DailyItem/DailyItem';
+import { ForecastData, dayData } from '../../../interfaces';
 
-const DailyObj: React.FC = props => {
-  return (
-    <div>
-      
-    </div>
-  )
+interface Props {
+  dataEnter: any
 }
 
-export default DailyObj
+export const DailyObj = (props: Props) => {
+  const [forecastData, setForecastData] = useState<any>([]);
+
+  useEffect(() => {
+    setForecastData(props.dataEnter);
+  }, [props]);
+
+  return (
+    <div>
+      {forecastData && forecastData.map((day: ForecastData, key: number) => (
+        <DailyItem dayData={{ day, index: key }} key={day.dt} />
+      ))}
+    </div>
+  );
+};
