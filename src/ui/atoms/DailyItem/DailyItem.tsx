@@ -10,14 +10,27 @@ interface Props {
   dayData: DailyItem;
 }
 
+interface Weather {
+  main: string;
+  icon: string;
+}
+
+const mathRound = (temp: any) => {
+  return Math.round(temp)
+}
+
 export const DailyItem = (props: Props) => {
+  const {temp_max, temp_min, humidity} = props.dayData.day.main
+  const {dt} = props.dayData.day
   return (
-    <div className="daily-wrapper">
-      <h3>Today</h3>
-      <span>{props.dayData.day.main.temp_max}</span>
-      <span>{props.dayData.day.main.temp_min}</span>
-      <img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png" alt=""/>
-      <span>{props.dayData.day.main.humidity}</span>
+    <div className="daily-wrapper__holder">
+      <h3>{dt}</h3>
+      <span>{`${mathRound(temp_max)}°`}</span><br/>
+      <span>{`${mathRound(temp_min)}°`}</span>
+      <div className="image-holder">
+        <img src={`http://openweathermap.org/img/wn/${props.dayData.day.weather[0].icon}@2x.png`} alt=""/>
+      </div>
+      <span>{humidity}%</span>
     </div>
   )
 }

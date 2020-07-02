@@ -9,6 +9,6 @@ export const WeatherServices = () => {
 
 export const DailyWeather = () => {
   return axios
-  .get(`https://api.openweathermap.org/data/2.5/weather?q=Chisinau&appid=${Key}&units=metric`)
+  .get(`https://api.openweathermap.org/data/2.5/weather?q=Chisinau&appid=${Key}`)
   .then(response => response.data)
 }

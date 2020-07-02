@@ -31,6 +31,7 @@ const Weather : React.FC = () => {
 
   return (
     <div className="weather-container">
+      <h2>Daily Forecast</h2>
       <DailyObj dataEnter={forecastData}/>
     </div>
   )

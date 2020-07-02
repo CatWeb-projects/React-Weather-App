@@ -14,7 +14,7 @@ export const DailyObj = (props: Props) => {
   }, [props]);
 
   return (
-    <div>
+    <div className="daily-wrapper">
       {forecastData && forecastData.map((day: ForecastData, key: number) => (
         <DailyItem dayData={{ day, index: key }} key={day.dt} />
       ))}

@@ -5,6 +5,7 @@ interface Temp {
 
 interface Weather {
   main: string;
+  icon: string;
 }
 
 export interface dayData {
