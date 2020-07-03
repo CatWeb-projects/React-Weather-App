@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { DailyItem } from '../../atoms/DailyItem/DailyItem';
-import { ForecastData, dayData } from '../../../interfaces';
+import { ForecastData } from '../../../interfaces';
 
 interface Props {
   dataEnter: any
 }
 
 export const DailyObj = (props: Props) => {
-  const [forecastData, setForecastData] = useState<any>([]);
+  const [forecastData, setForecastData] = useState<ForecastData[]>([]);
 
   useEffect(() => {
     setForecastData(props.dataEnter);

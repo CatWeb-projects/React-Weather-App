@@ -1,40 +1,39 @@
 import React, {useState, useEffect} from 'react'
-import {WeatherServices, DailyWeather} from '../../molecules/WeatherServices/WeatherServices'
-// import {ForecastData} from '../../../interfaces'
+import {WeatherServices, HourlyWeather} from '../../molecules/WeatherServices/WeatherServices'
+import {ForecastData} from '../../../interfaces'
 import {DailyObj} from '../../molecules/DailyObj/DailyObj'
+import {HourlyObj} from '../../molecules/HourlyObj/HourlyObj'
 
-export interface ForecastData{
-
-}
-
-const Weather : React.FC = () => {
-  const [forecastData, setForecastData] = useState<any>([]);
-  const [dailyData, setDailyData] = useState<any>([]);
+export const Weather : React.FC = () => {
+  const [forecastData, setForecastData] = useState<ForecastData[]>([]);
+  const [dailyData, setDailyData] = useState<ForecastData[]>([]);
 
   useEffect(() => {
     const getData = async () => {
       const savedData = await WeatherServices();
       setForecastData(savedData.list)
-      console.log(savedData,"dasda")
+      console.log(savedData)
     };
     getData();
   }, [setForecastData]);
 
   useEffect(() => {
     const getDailyData = async () => {
-      const dailySavedData = await DailyWeather();
-      setDailyData(dailySavedData)
+      const dailySavedData = await HourlyWeather();
+      setDailyData(dailySavedData.list)
     };
     getDailyData();
-    // console.log(getDailyData())
   }, [setDailyData]);
 
   return (
     <div className="weather-container">
-      <h2>Daily Forecast</h2>
-      <DailyObj dataEnter={forecastData}/>
+      <div className="weather-container-daily">
+        <h2>Daily Forecast</h2>
+        <DailyObj dataEnter={forecastData}/>
+      </div>
+      <div className="weather-container-hourly">
+        <HourlyObj hourDataEnter={dailyData}/>
+      </div>
     </div>
   )
 }
-
-export default Weather
