@@ -37,4 +37,3 @@ export interface ForecastData {
 export interface Props {
   data: ForecastData[];
 }
-

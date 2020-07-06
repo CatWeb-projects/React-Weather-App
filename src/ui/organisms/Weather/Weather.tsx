@@ -1,18 +1,23 @@
-import React, {useState, useEffect} from 'react'
-import {WeatherServices, HourlyWeather} from '../../molecules/WeatherServices/WeatherServices'
-import {ForecastData} from '../../../interfaces'
-import {DailyObj} from '../../molecules/DailyObj/DailyObj'
-import {HourlyObj} from '../../molecules/HourlyObj/HourlyObj'
+import React, { useState, useEffect } from 'react';
+import {
+  WeatherServices,
+  HourlyWeather
+} from '../../molecules/WeatherServices/WeatherServices';
+import { ForecastData } from '../../../interfaces';
+import { DailyObj } from '../../molecules/DailyObj/DailyObj';
+import { HourlyObj } from '../../molecules/HourlyObj/HourlyObj';
 
-export const Weather : React.FC = () => {
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
+export const Weather: React.FC = () => {
   const [forecastData, setForecastData] = useState<ForecastData[]>([]);
   const [dailyData, setDailyData] = useState<ForecastData[]>([]);
 
   useEffect(() => {
     const getData = async () => {
       const savedData = await WeatherServices();
-      setForecastData(savedData.list)
-      console.log(savedData)
+      setForecastData(savedData.list);
+      console.log(savedData);
     };
     getData();
   }, [setForecastData]);
@@ -20,20 +25,32 @@ export const Weather : React.FC = () => {
   useEffect(() => {
     const getDailyData = async () => {
       const dailySavedData = await HourlyWeather();
-      setDailyData(dailySavedData.list)
+      setDailyData(dailySavedData.list);
     };
     getDailyData();
   }, [setDailyData]);
 
   return (
-    <div className="weather-container">
-      <div className="weather-container-daily">
-        <h2>Daily Forecast</h2>
-        <DailyObj dataEnter={forecastData}/>
-      </div>
-      <div className="weather-container-hourly">
-        <HourlyObj hourDataEnter={dailyData}/>
-      </div>
-    </div>
-  )
-}
+    <Router>
+      <Switch>
+        <div className="weather-container">
+          <Route path="/" component={DailyObj} exact>
+            <div className="weather-container-daily">
+              <h2>Daily Forecast</h2>
+              <Link to="/hourly">To Hourly</Link>
+              <DailyObj dataEnter={forecastData} />
+            </div>
+          </Route>
+          <Route path="/hourly" component={HourlyObj}>
+            <div className="weather-container-hourly">
+              <div className="hourly">
+                <Link to="/">To Daily</Link>
+              </div>
+              <HourlyObj hourDataEnter={dailyData} />
+            </div>
+          </Route>
+        </div>
+      </Switch>
+    </Router>
+  );
+};

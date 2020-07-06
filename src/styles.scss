@@ -2,13 +2,16 @@
 @import './ui/molecules/DailyObj/DailyObj.Scss';
 @import './ui//molecules/HourlyObj/HourlyObj.Scss';
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   font-size: 20px;
   font-family: Comic Sans MS;
 }
-*, ::after, ::before {
+*,
+::after,
+::before {
   box-sizing: border-box;
 }
 ul {

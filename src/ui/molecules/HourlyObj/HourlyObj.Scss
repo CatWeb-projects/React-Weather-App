@@ -1,9 +1,10 @@
 .hourly-wrapper {
+  margin-top: 44px;
   span {
     font-size: 30px;
   }
   &__container {
-    background-color:  #cc90d8;
+    background-color: #cc90d8;
     padding-top: 10px;
   }
   &__holder {
@@ -19,13 +20,14 @@
     border-radius: 10px;
   }
   &__container:nth-child(2n) &__holder {
-    background:  #31539c;
+    background: #31539c;
   }
   &__text {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    > span:nth-child(1), span:nth-child(4) {
+    > span:nth-child(1),
+    span:nth-child(4) {
       font-weight: 800;
     }
     > span:nth-child(2) {

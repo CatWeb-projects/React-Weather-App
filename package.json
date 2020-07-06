@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/react-router-dom": "^5.1.5",
     "axios": "^0.19.2",
     "dayjs": "^1.8.28",
     "eslint-config-airbnb": "^18.2.0",
@@ -22,7 +23,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lerna:lint:js": "lerna run lint:js:fix"
+    "lerna:lint:js": "lerna run lint:js:fix",
+    "format": "npx prettier --write \"src/**/*.{js,jsx,ts,tsx,json,scss}\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -50,7 +52,7 @@
       "npx eslint . --fix",
       "git add"
     ],
-    "*.(js|html|css)": [
+    "src/**/*.{js,jsx,scss}": [
       "npx prettier --write -c .prettierrc",
       "git add"
     ]

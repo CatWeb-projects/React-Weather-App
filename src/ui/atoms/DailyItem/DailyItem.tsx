@@ -1,23 +1,23 @@
-import React from 'react'
+import React from 'react';
 import { ForecastData } from '../../../interfaces';
 import dayjs from 'dayjs';
 
 interface DailyItem {
   day: ForecastData;
-  index: number
+  index: number;
 }
- 
+
 interface Props {
   dayData: DailyItem;
 }
 
 const mathRound = (temp: number) => {
-  return Math.round(temp)
-}
+  return Math.round(temp);
+};
 
 export const DailyItem = (props: Props) => {
-  const {max, min, day} = props.dayData.day.temp
-  const {dt, humidity} = props.dayData.day
+  const { max, min, day } = props.dayData.day.temp;
+  const { dt, humidity } = props.dayData.day;
 
   const getDay = () => {
     const newDate = dayjs.unix(dt).date();
@@ -31,7 +31,7 @@ export const DailyItem = (props: Props) => {
     if (date === 5) dayOfWeek = 'Fri';
     if (date === 6) dayOfWeek = 'Sat';
     return `${dayOfWeek} ${newDate} `;
-  }
+  };
 
   return (
     <div className="daily-wrapper__holder">
@@ -39,9 +39,12 @@ export const DailyItem = (props: Props) => {
       <span>{`${mathRound(day)}°`}</span>
       <span>{`${mathRound(max)}°/${mathRound(min)}°`}</span>
       <div className="image-holder">
-        <img src={`http://openweathermap.org/img/wn/${props.dayData.day.weather[0].icon}@2x.png`} alt=""/>
+        <img
+          src={`http://openweathermap.org/img/wn/${props.dayData.day.weather[0].icon}@2x.png`}
+          alt=""
+        />
       </div>
       <span>{humidity}%</span>
     </div>
-  )
-}
+  );
+};
