@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ForecastData } from 'interfaces';
-import { DailyItem } from '../../atoms/DailyItem/DailyItem';
+import { DailyItem } from 'ui/atoms/DailyItem/DailyItem';
+import { WeatherServices } from 'WeatherServices/WeatherServices';
 
 interface Props {
   dataEnter: any;
@@ -8,6 +9,14 @@ interface Props {
 
 export const DailyObj = (props: Props) => {
   const [forecastData, setForecastData] = useState<ForecastData[]>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const savedData = await WeatherServices();
+      setForecastData(savedData.list);
+    };
+    getData();
+  }, [setForecastData]);
 
   useEffect(() => {
     setForecastData(props.dataEnter);

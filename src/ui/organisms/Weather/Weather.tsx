@@ -1,32 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import {
-  WeatherServices,
-  HourlyWeather
-} from '../../../WeatherServices/WeatherServices';
 import { ForecastData } from 'interfaces';
-import { DailyObj } from '../../molecules/DailyObj/DailyObj';
-import { HourlyObj } from '../../molecules/HourlyObj/HourlyObj';
+import { DailyObj } from 'ui/molecules/DailyObj/DailyObj';
+import { HourlyObj } from 'ui/molecules/HourlyObj/HourlyObj';
 
 export const Weather: React.FC = () => {
   const [forecastData, setForecastData] = useState<ForecastData[]>([]);
   const [dailyData, setDailyData] = useState<ForecastData[]>([]);
-
-  useEffect(() => {
-    const getData = async () => {
-      const savedData = await WeatherServices();
-      setForecastData(savedData.list);
-    };
-    getData();
-  }, [setForecastData]);
-
-  useEffect(() => {
-    const getDailyData = async () => {
-      const dailySavedData = await HourlyWeather();
-      setDailyData(dailySavedData.list);
-    };
-    getDailyData();
-  }, [setDailyData]);
 
   return (
     <Router>
