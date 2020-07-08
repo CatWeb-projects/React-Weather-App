@@ -18,13 +18,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "baseUrl": "src",
-    "paths": {
-        "actions/*": [ "app/actions/*" ],
-        "selectors/*": [ "app/selectors/*" ],
-        "ui/*": [ "app/ui/*" ],
-        "logger": [ "util/logger" ],
-    }
+    "baseUrl": "src"
   },
   "include": [
     "src"
