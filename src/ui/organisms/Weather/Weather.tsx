@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import {
   WeatherServices,
   HourlyWeather
-} from '../../molecules/WeatherServices/WeatherServices';
-import { ForecastData } from '../../../interfaces';
+} from '../../../WeatherServices/WeatherServices';
+import { ForecastData } from 'interfaces';
 import { DailyObj } from '../../molecules/DailyObj/DailyObj';
 import { HourlyObj } from '../../molecules/HourlyObj/HourlyObj';
-
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 export const Weather: React.FC = () => {
   const [forecastData, setForecastData] = useState<ForecastData[]>([]);

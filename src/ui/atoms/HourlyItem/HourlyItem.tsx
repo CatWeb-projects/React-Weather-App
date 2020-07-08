@@ -1,6 +1,5 @@
 import React from 'react';
-import { ForecastData } from '../../../interfaces';
-import { Link } from 'react-router-dom';
+import { ForecastData } from 'interfaces';
 
 interface HourlyItem {
   day: ForecastData;

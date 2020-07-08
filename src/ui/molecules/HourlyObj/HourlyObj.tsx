@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { ForecastData } from 'interfaces';
 import { HourlyItem } from '../../atoms/HourlyItem/HourlyItem';
-import { ForecastData } from '../../../interfaces';
 
 interface Props {
   hourDataEnter: any;
