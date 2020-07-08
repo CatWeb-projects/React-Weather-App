@@ -4,7 +4,7 @@ import { DailyItem } from 'ui/atoms/DailyItem/DailyItem';
 import { WeatherServices } from 'WeatherServices/WeatherServices';
 
 interface Props {
-  dataEnter: any;
+  dataEnter: ForecastData[];
 }
 
 export const DailyObj = (props: Props) => {

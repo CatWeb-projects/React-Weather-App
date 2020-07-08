@@ -4,7 +4,7 @@ import { HourlyItem } from 'ui/atoms/HourlyItem/HourlyItem';
 import { HourlyWeather } from 'WeatherServices/WeatherServices';
 
 interface Props {
-  hourDataEnter: any;
+  hourDataEnter: ForecastData[];
 }
 
 export const HourlyObj = (props: Props) => {
