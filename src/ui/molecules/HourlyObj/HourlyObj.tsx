@@ -9,16 +9,23 @@ interface Props {
 
 export const HourlyObj = (props: Props) => {
   const [dailyData, setDailyData] = useState<ForecastData[]>([]);
-  const [loading, isLoading] = useState(true)
+  const [loading, isLoading] = useState(true);
 
   useEffect(() => {
     const getDailyData = async () => {
-      const dailySavedData = await HourlyWeather();
-      setDailyData(dailySavedData.list);
-      isLoading(false)
+      try {
+        const dailySavedData = await HourlyWeather.request();
+        setDailyData(dailySavedData.list);
+        isLoading(false);
+      } catch (error) {
+        console.log('error', error);
+      }
     };
     getDailyData();
-  }, [setDailyData]);
+    return () => {
+      HourlyWeather.cancel();
+    };
+  }, []);
 
   useEffect(() => {
     setDailyData(props.hourDataEnter);
@@ -26,7 +33,7 @@ export const HourlyObj = (props: Props) => {
 
   return (
     <div className="hourly-wrapper">
-      {loading &&<div className="loading">Loading</div>}
+      {loading && <div className="loading">Loading...</div>}
       {dailyData &&
         dailyData.map((day: ForecastData, key: number) => (
           <HourlyItem hourData={{ day, index: key }} key={day.dt} />

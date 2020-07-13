@@ -9,16 +9,23 @@ interface Props {
 
 export const DailyObj = (props: Props) => {
   const [forecastData, setForecastData] = useState<ForecastData[]>([]);
-  const [loading, isLoading] = useState(true)
+  const [loading, isLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
-      const savedData = await WeatherServices();
-      setForecastData(savedData.list);
-      isLoading(false)
+      try {
+        const savedData = await WeatherServices.request();
+        setForecastData(savedData.list);
+        isLoading(false);
+      } catch (error) {
+        console.log('error', error);
+      }
     };
     getData();
-  }, [setForecastData]);
+    return () => {
+      WeatherServices.cancel();
+    };
+  }, []);
 
   useEffect(() => {
     setForecastData(props.dataEnter);
@@ -26,7 +33,7 @@ export const DailyObj = (props: Props) => {
 
   return (
     <div className="daily-wrapper">
-      {loading &&<div className="loading">Loading</div>}
+      {loading && <div className="loading">Loading...</div>}
       {forecastData &&
         forecastData.map((day, key) => (
           <DailyItem dayData={{ day, index: key }} key={day.dt} />

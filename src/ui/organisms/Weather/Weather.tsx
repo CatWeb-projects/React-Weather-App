@@ -5,8 +5,8 @@ import { DailyObj } from 'ui/molecules/DailyObj/DailyObj';
 import { HourlyObj } from 'ui/molecules/HourlyObj/HourlyObj';
 
 export const Weather: React.FC = () => {
-  const [forecastData, setForecastData] = useState<ForecastData[]>([]);
-  const [dailyData, setDailyData] = useState<ForecastData[]>([]);
+  const [forecastData] = useState<ForecastData[]>([]);
+  const [dailyData] = useState<ForecastData[]>([]);
 
   return (
     <Router>
