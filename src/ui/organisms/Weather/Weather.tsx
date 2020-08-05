@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { DailyObj } from 'ui/molecules/DailyObj/DailyObj';
 import { HourlyObj } from 'ui/molecules/HourlyObj/HourlyObj';
