@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import dayjs from 'dayjs';
 import { ForecastData } from 'interfaces';
 
@@ -16,8 +16,12 @@ const mathRound = (temp: number) => {
 };
 
 export const DailyItem = (props: Props) => {
-  const { max, min, day } = props.dayData.day.temp;
-  const { dt, humidity } = props.dayData.day;
+  const { max, min, day } = useMemo(() => props.dayData.day.temp, [
+    props.dayData.day.temp
+  ]);
+  const { dt, humidity } = useMemo(() => props.dayData.day, [
+    props.dayData.day
+  ]);
 
   const getDay = () => {
     const newDate = dayjs.unix(dt).date();

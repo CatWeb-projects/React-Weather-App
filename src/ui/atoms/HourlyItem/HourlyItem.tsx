@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo} from 'react';
 import { ForecastData } from 'interfaces';
 
 interface HourlyItem {
@@ -15,8 +15,14 @@ const mathRound = (number: number) => {
 };
 
 export const HourlyItem = (props: Props) => {
-  const { temp, humidity, temp_max, temp_min } = props.hourData.day.main;
-  const { main, icon } = props.hourData.day.weather[0];
+  const { temp, humidity, temp_max, temp_min } = useMemo(
+    () => props.hourData.day.main,
+    [props.hourData.day.main]
+  );
+  const { main, icon } = useMemo(() => props.hourData.day.weather[0], [
+    props.hourData.day.weather[0]
+  ]);
+
   return (
     <div className="hourly-wrapper__container">
       <div className="hourly-wrapper__holder">

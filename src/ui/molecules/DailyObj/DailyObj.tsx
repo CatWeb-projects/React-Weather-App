@@ -1,35 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { ForecastData } from 'interfaces';
 import { DailyItem } from 'ui/atoms/DailyItem/DailyItem';
-import { WeatherServices } from 'WeatherServices/WeatherServices';
+import { dailyWeather } from 'services/dailyWeather';
 
-interface Props {
-  dataEnter: ForecastData[];
-}
-
-export const DailyObj = (props: Props) => {
+export const DailyObj = () => {
   const [forecastData, setForecastData] = useState<ForecastData[]>([]);
-  const [loading, isLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const savedData = await WeatherServices.request();
+        const savedData = await dailyWeather.request();
         setForecastData(savedData.list);
-        isLoading(false);
+        setLoading(false);
       } catch (error) {
-        console.log('error', error);
+        console.log('error');
       }
     };
     getData();
     return () => {
-      WeatherServices.cancel();
+      dailyWeather.cancel();
     };
   }, []);
-
-  useEffect(() => {
-    setForecastData(props.dataEnter);
-  }, [props.dataEnter]);
 
   return (
     <div className="daily-wrapper">
