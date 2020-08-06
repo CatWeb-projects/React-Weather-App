@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import dayjs from 'dayjs';
 import { ForecastData } from 'interfaces';
+import { mathRound } from 'libs/number';
 
 interface DailyItem {
   day: ForecastData;
@@ -11,19 +12,17 @@ interface Props {
   dayData: DailyItem;
 }
 
-const mathRound = (temp: number) => {
-  return Math.round(temp);
-};
-
 export const DailyItem = (props: Props) => {
-  const { max, min, day } = useMemo(() => props.dayData.day.temp, [
-    props.dayData.day.temp
-  ]);
-  const { dt, humidity } = useMemo(() => props.dayData.day, [
-    props.dayData.day
-  ]);
+  const [{ max, min, day }, { dt, humidity }] = useMemo(() => {
+    const { max, min, day } = props.dayData.day.temp;
+    const { dt, humidity } = props.dayData.day;
+    return [
+      { max, min, day },
+      { dt, humidity }
+    ];
+  }, [props.dayData]);
 
-  const getDay = () => {
+  const getDay = useCallback(() => {
     const newDate = dayjs.unix(dt).date();
     const date = dayjs.unix(dt).day();
     let dayOfWeek = '';
@@ -35,7 +34,7 @@ export const DailyItem = (props: Props) => {
     if (date === 5) dayOfWeek = 'Fri';
     if (date === 6) dayOfWeek = 'Sat';
     return `${dayOfWeek} ${newDate} `;
-  };
+  }, []);
 
   return (
     <div className="daily-wrapper__holder">
